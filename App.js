@@ -1,11 +1,21 @@
-import React from 'react';
-import Random from "./Components/Random";
-//import Navigation from './Navigation/Navigation';
+import { createStackNavigator, createAppContainer } from 'react-navigation';
+import { Random } from "./Pages/Random";
+import { Category } from "./Pages/Category";
 
-export default class App extends React.Component {
-    render() {
-        return (
-            <Random/>
-        );
+
+const MainNavigator = createStackNavigator({
+        Random: {
+            screen: Random
+        },
+        Category: {
+            screen: Category
+        },
+    },
+    {
+        initialRouteName: 'Category'
     }
-}
+);
+
+const App = createAppContainer(MainNavigator);
+
+export default App;
