@@ -2,8 +2,8 @@ import React from 'react';
 import { View, Text, Image, TouchableOpacity, FlatList } from 'react-native';
 import { Icon } from 'native-base';
 import { styles } from './styles';
-import JokeCard from "../Components/JokeCard";
-import {getRandomJoke} from "../API/chucknorris_api";
+import JokeItem from "../Components/JokeItem";
+import { getJokeByCategory } from "../API/chucknorris_api";
 
 export class Category extends React.Component {
 
@@ -14,13 +14,17 @@ export class Category extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            titleText: 'Movies',
             joke: '',
         };
     }
 
+    componentDidMount() {
+        this._getJoke();
+    }
+
     _getJoke() {
-        getRandomJoke().then(res => {
+        const cat =  this.props.navigation.getParam('nameCat', 'null');
+        getJokeByCategory(cat).then(res => {
             this.setState({
                 joke: res.value,
             })
@@ -29,7 +33,7 @@ export class Category extends React.Component {
 
     _renderItem = ({ item }) => {
         return (
-            <JokeCard
+            <JokeItem
                 text={this.state.joke}
             />
         );
@@ -37,6 +41,7 @@ export class Category extends React.Component {
 
     render() {
         const {goBack} = this.props.navigation;
+        const titleCat =  this.props.navigation.getParam('nameCat', 'null');
 
         return(
             <View style={styles.main_container}>
@@ -58,19 +63,11 @@ export class Category extends React.Component {
                     />
 
                     <Text style={styles.title_app}>
-                        {this.state.titleText}
+                        {titleCat}
                     </Text>
                 </View>
 
                 <View style={styles.container_jokes_list}>
-                    <TouchableOpacity
-                        style={styles.button_random}
-                        activeOpacity={0.9}
-                        onPress={()=> this._getJoke()}
-                    >
-                        <Text style={{color: 'white', fontSize: 25}}>Random joke</Text>
-                    </TouchableOpacity>
-
                     <FlatList
                         style={styles.jokes_list}
                         data={this.state.joke}

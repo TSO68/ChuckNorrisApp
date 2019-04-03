@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, Text, Image, TouchableOpacity, Button } from 'react-native';
+import { View, Text, Image, TouchableOpacity, Button, FlatList } from 'react-native';
 import { styles } from './styles';
 import { getRandomJoke } from "../API/chucknorris_api";
+import CategoryList from "../Components/CategoryList";
 
 export class Random extends React.Component {
 
@@ -14,6 +15,7 @@ export class Random extends React.Component {
         this.state = {
             titleText: "Chuck Norris Jokes",
             joke: '',
+            categories: [],
         };
     }
 
@@ -25,8 +27,12 @@ export class Random extends React.Component {
         })
     }
 
+    _displayCategory = (nameCat) => {
+        this.props.navigation.navigate('Category', {nameCat: nameCat})
+    };
+
     render() {
-        const { navigate } = this.props.navigation;
+        //const { navigate } = this.props.navigation;
 
         return(
             <View style={styles.main_container}>
@@ -38,11 +44,6 @@ export class Random extends React.Component {
                     <Image
                         style={styles.logo_app}
                         source={{uri: 'https://assets.chucknorris.host/img/avatar/chuck-norris.png'}}
-                    />
-
-                    <Button
-                        title="<-"
-                        onPress={() => navigate('Category')}
                     />
                 </View>
 
@@ -58,6 +59,11 @@ export class Random extends React.Component {
                     <Text style={styles.joke_text}>
                         {this.state.joke}
                     </Text>
+
+                    <CategoryList
+                        categories={this.state.categories}
+                        navigation={this.props.navigation}
+                    />
                 </View>
             </View>
 

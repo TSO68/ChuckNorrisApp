@@ -12,7 +12,7 @@ const MainNavigator = createStackNavigator({
         },
     },
     {
-        initialRouteName: 'Category'
+        initialRouteName: 'Random'
     }
 );
 
