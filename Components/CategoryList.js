@@ -2,7 +2,6 @@ import React from 'react'
 import { FlatList } from 'react-native'
 import CategoryItem from './CategoryItem'
 import { styles } from './styles';
-import { CATEGORIES } from "../Helper/Constants";
 
 class CategoryList extends React.Component {
 
@@ -21,7 +20,7 @@ class CategoryList extends React.Component {
         return (
             <FlatList
                 style={styles.category_list}
-                data={CATEGORIES}
+                data={this.props.categories}
                 keyExtractor={(item) => item.id}
                 renderItem={({item}) => (
                     <CategoryItem

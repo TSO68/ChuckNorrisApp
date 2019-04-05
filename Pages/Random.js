@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, Text, Image, TouchableOpacity, Button, FlatList } from 'react-native';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { styles } from './styles';
-import { getRandomJoke } from "../API/chucknorris_api";
+import { getCategory, getRandomJoke } from "../API/chucknorris_api";
 import CategoryList from "../Components/CategoryList";
 
 export class Random extends React.Component {
@@ -19,10 +19,22 @@ export class Random extends React.Component {
         };
     }
 
+    componentDidMount() {
+        this._getCategory();
+    }
+
     _getJoke() {
         getRandomJoke().then(res => {
             this.setState({
                 joke: res.value,
+            })
+        })
+    }
+
+    _getCategory() {
+        getCategory().then(res => {
+            this.setState({
+                categories: res,
             })
         })
     }

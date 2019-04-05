@@ -3,6 +3,7 @@ import { StyleSheet } from 'react-native';
 //CategoryList
 const category_list = {
     marginTop: 20,
+    marginBottom: 10,
     paddingTop: 20,
 };
 

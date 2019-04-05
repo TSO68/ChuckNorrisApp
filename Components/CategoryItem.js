@@ -10,10 +10,10 @@ class CategoryItem extends React.Component {
 
         return (
             <TouchableOpacity
-                onPress={() => displayCategory(cat.name)}
+                onPress={() => displayCategory(cat)}
                 style={styles.container_category}>
                     <Text style={styles.textItem}>
-                        {cat.name}
+                        {cat}
                     </Text>
             </TouchableOpacity>
         )

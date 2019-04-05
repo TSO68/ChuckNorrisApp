@@ -7,6 +7,5 @@
 
 #### TODO
 
-* Récupérer les catégories avec l'API au lieu d'un fichier local
-* Afficher des blagues différentes sur le page `Category`
+* Afficher des blagues différentes sur la page `Category`
 * Mise en place/corrections des components `JokeList`/`JokeItem` sur le modèle de `CategoryList`/`CategoryItem`
